@@ -1,5 +1,5 @@
 {
-  "name": "@nktnet1/esm",
+  "name": "esm-sync",
   "version": "3.3.3-beta.0",
   "description": "Tomorrow's ECMAScript modules today!",
   "keywords": [
@@ -13,14 +13,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/nktnet1/esm"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "url": "https://github.com/nktnet1/esm-sync"
   },
   "license": "MIT",
   "author": "Khiet Tam Nguyen <tamkhietnguyen1@gmail.com>",
   "main": "esm.js",
+  "types": "index.d.ts",
   "private": false,
   "runkitExample": "require = require(\"@nktnet1/esm\")(module)\nrequire(\"lodash-es\")",
   "esm": true,
@@ -118,6 +116,7 @@
   },
   "files": [
     "index.js",
+    "index.d.ts",
     "esm.js",
     "esm/loader.js"
   ],
