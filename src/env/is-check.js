@@ -19,4 +19,3 @@ function init() {
 export default shared.inited
   ? shared.module.envIsCheck
   : shared.module.envIsCheck = init()
-

@@ -26,4 +26,3 @@ function init() {
 export default shared.inited
   ? shared.module.utilAssignProperties
   : shared.module.utilAssignProperties = init()
-
