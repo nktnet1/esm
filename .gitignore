@@ -21,3 +21,5 @@
 /test/fixture/scenario/webpack/output.js
 /test/node_modules/symlink
 /test/vendor
+
+/.npmrc
