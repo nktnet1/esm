@@ -16,7 +16,7 @@ const safeCrypto = shared.inited
   : shared.module.safeCrypto = init()
 
 export const {
-  Hash,
+  createHash,
   timingSafeEqual
 } = safeCrypto
 

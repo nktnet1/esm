@@ -1,8 +1,5 @@
 _.x([["default",()=>_anonymous]]);
 
-
-
-
 function
 /*
 Comment four.
