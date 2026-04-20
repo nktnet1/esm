@@ -150,7 +150,7 @@ const Runtime = {
   },
   compileEval(content) {
     // Section 18.2.1.1: PerformEval()
-    // Setp 2: Only evaluate strings.
+    // Step 2: Only evaluate strings.
     // https://tc39.github.io/ecma262/#sec-performeval
     if (typeof content !== "string") {
       return content

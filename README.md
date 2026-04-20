@@ -4,7 +4,7 @@
 
 * Assorted updates from [@httptoolkit/esm](https://github.com/httptoolkit/esm) and [esm-wallaby fork](https://www.npmjs.com/package/esm-wallaby), adding support for ES modules containing new ES syntax, supporting modern Node versions (at least up to v22), and supporting `node:*` imports.
 * Support for modules that use the `const require = createRequire(...)` pattern (or declare any other global `require` variable) which are otherwise unusable with `esm`.
-* Support for modules that use only an `exports` map in their package.json, without a `main` field, which are otherwise unresolveable (reporting "Cannot find module", even though `import()` works correctly).
+* Support for modules that use only an `exports` map in their package.json, without a `main` field, which are otherwise unresolvable (reporting "Cannot find module", even though `import()` works correctly).
 * Built-in types for use in TypeScript projects
 
 Install

@@ -7,13 +7,13 @@ function init() {
     PACKAGE_PARENT_NAME
   } = ESM
 
-  function isJamine() {
+  function isJasmine() {
     return PACKAGE_PARENT_NAME === "jasmine"
   }
 
-  return isJamine
+  return isJasmine
 }
 
 export default shared.inited
-  ? shared.module.envIsJamine
-  : shared.module.envIsJamine = init()
+  ? shared.module.envIsJasmine
+  : shared.module.envIsJasmine = init()

@@ -7,5 +7,5 @@
     "target": "es6",
     "types": []
   },
-  "exlcude": ["node_modules"]
+  "exclude": ["node_modules"]
 }

@@ -157,7 +157,7 @@ function init() {
         return
       }
 
-      // Suport import statements:
+      // Support import statements:
       // import defaultName from "mod"
       // import * as name from "mod"
       // import { export as alias } from "mod"
