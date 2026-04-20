@@ -2,7 +2,15 @@
   "name": "@httptoolkit/esm",
   "version": "3.3.2",
   "description": "Tomorrow's ECMAScript modules today!",
-  "keywords": "commonjs, ecmascript, export, import, modules, node, require",
+  "keywords": [
+    "commonjs",
+    "ecmascript",
+    "export",
+    "import",
+    "modules",
+    "node",
+    "require"
+  ],
   "repository": "httptoolkit/esm",
   "license": "MIT",
   "author": "Tim Perry <tim@httptoolkit.com>",

@@ -1,10 +1,10 @@
-import { Hash } from "../safe/crypto.js"
+import { createHash } from "../safe/crypto.js"
 
 import shared from "../shared.js"
 
 function init() {
   function md5(string) {
-    const hash = new Hash("md5")
+    const hash = createHash("md5")
 
     if (typeof string === "string") {
       hash.update(string)
