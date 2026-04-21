@@ -112,8 +112,8 @@ importers:
         specifier: ^11.3.4
         version: 11.3.4
       global-prefix:
-        specifier: ^3.0.0
-        version: 3.0.0
+        specifier: ^4.0.0
+        version: 4.0.0
       globby:
         specifier: ^11.1.0
         version: 11.1.0
@@ -190,14 +190,14 @@ importers:
         specifier: ^6.3.0
         version: 6.3.0
       sqreen:
-        specifier: ^1.64.2
-        version: 1.64.2
+        specifier: ^2.0.2
+        version: 2.0.2
       strip-ansi:
-        specifier: ^6.0.1
-        version: 6.0.1
+        specifier: ^7.2.0
+        version: 7.2.0
       terser:
-        specifier: ^4.8.1
-        version: 4.8.1
+        specifier: ^5.46.1
+        version: 5.46.1
       terser-webpack-plugin:
         specifier: ^3.1.0
         version: 3.1.0(bluebird@3.7.2)(webpack@4.47.0)
@@ -1065,6 +1065,9 @@ packages:
     resolution: {integrity: sha512-bRISgCIjP20/tbWSPWMEi54QVPRZExkuD9lJL+UIxUKtwVJA8wW1Trb1jMs1RFXo1CBTNZ/5hpC9QvmKWdopKw==}
     engines: {node: '>=6.0.0'}
 
+  '@jridgewell/source-map@0.3.11':
+    resolution: {integrity: sha512-ZMp1V8ZFcPG5dIWnQLr3NSI1MiCU7UETdS/A0G8V/XWHvJv3ZsFqutJn1Y5RPmAPX6F3BiE397OqveU/9NCuIA==}
+
   '@jridgewell/sourcemap-codec@1.5.5':
     resolution: {integrity: sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og==}
 
@@ -1892,9 +1895,9 @@ packages:
   builtin-status-codes@3.0.0:
     resolution: {integrity: sha512-HpGFw18DgFWlncDfjTa2rcQ4W88O1mC8e8yZ2AvQY5KDaktSTwo+KRf6nHK6FRI5FyRyb/5T6+TSxfP7QyGsmQ==}
 
-  busboy@0.3.1:
-    resolution: {integrity: sha512-y7tTxhGKXcyBxRKAni+awqx8uqaJKrSFSNFSeRG5CsWNdmy2BIK+6VGWEW7TZnIO/533mtMEA4rOevQV815YJw==}
-    engines: {node: '>=4.5.0'}
+  busboy@1.6.0:
+    resolution: {integrity: sha512-8SFQbg/0hQ9xy3UNTB0YEnsNBbWfhf7RtnzpL7TkBiTBRfrQ9Fxcnz7VJsleJpyp6rVLvXiuORqjlHi5q+PYuA==}
+    engines: {node: '>=10.16.0'}
 
   bytes@3.1.2:
     resolution: {integrity: sha512-/Nf7TyzTx6S3yRJObOAV7956r8cr2+Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdcYbEg==}
@@ -2486,10 +2489,6 @@ packages:
     resolution: {integrity: sha512-TLz+x/vEXm/Y7P7wn1EJFNLxYpUD4TgMosxY6fAVJUnJMbupHBOncxyWUG9OpTaH9EBD7uFI5LfEgmMOc54DsA==}
     engines: {node: '>=8'}
 
-  dicer@0.3.0:
-    resolution: {integrity: sha512-MdceRRWqltEG2dZqO769g27N/3PXfcKl04VhYnBlo2YhH7zPi88VebsjTKclaOyiuMaGU72hTfw3VkUitGcVCA==}
-    engines: {node: '>=4.5.0'}
-
   diff-sequences@26.6.2:
     resolution: {integrity: sha512-Mv/TDa3nZ9sbc5soK+OoA74BsS3mL37yixCvUAQkiuA4Wz6YtwP/K47n2rv2ovzHZvoiQeA5FTQOschKkEwB0Q==}
     engines: {node: '>= 10.14.2'}
@@ -3061,10 +3060,6 @@ packages:
     resolution: {integrity: sha512-f7ccFPK3SXFHpx15UIGyRJ/FJQctuKZ0zVuN3frBo4HnK3cay9VEW0R6yPYFHC0AgqhukPzKjq22t5DmAyqGyw==}
     engines: {node: '>=16'}
 
-  flat@4.1.1:
-    resolution: {integrity: sha512-FmTtBsHskrU6FJ2VxCnsDb84wu9zhmO3cUX2kGFb5tuwhfXxGciiT0oRY+cck35QmG+NmGh5eLz6lLCpWTqwpA==}
-    hasBin: true
-
   flat@5.0.2:
     resolution: {integrity: sha512-b6suED+5/3rTpUBdG1gupIl8MPFCAMA0QXwmljLhvCUKcUvdE4gWky9zpuGCcXHOsz4J9wPGNWq6OKpmIzz3hQ==}
     hasBin: true
@@ -3299,6 +3294,10 @@ packages:
   global-prefix@3.0.0:
     resolution: {integrity: sha512-awConJSVCHVGND6x3tmMaKcQvwXLhjdkmomy2W+Goaui8YPgYgXJZewhg3fWC+DlfqqQuWg8AwqjGTD2nAPVWg==}
     engines: {node: '>=6'}
+
+  global-prefix@4.0.0:
+    resolution: {integrity: sha512-w0Uf9Y9/nyHinEk5vMJKRie+wa4kR5hmDbEhGGds/kG1PwGLLHKRoNMeJOyCQjjBkANlnScqgzcFwGHgmgLkVA==}
+    engines: {node: '>=16'}
 
   globals@13.24.0:
     resolution: {integrity: sha512-AhO5QUcj8llrbG09iWhPU2B204J1xnPeL8kQmVorSsy+Sjj1sk8gIyh6cUocGmH4L0UuhAJy+hJMRA4mgA4mFQ==}
@@ -3597,6 +3596,10 @@ packages:
     resolution: {integrity: sha512-7PnF4oN3CvZF23ADhA5wRaYEQpJ8qygSkbtTXWBeXWXmEVRXK+1ITciHWwHhsjv1TmW0MgacIv6hEi5pX5NQdA==}
     engines: {node: '>=10'}
 
+  ini@4.1.3:
+    resolution: {integrity: sha512-X7rqawQBvfdjS10YU1y1YVreA3SsLrW9dX2CewP2EbBJM4ypVNLDkO5y04gejPwKIY9lR+7r9gn3rFPt/kmWFg==}
+    engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
+
   internal-slot@1.1.0:
     resolution: {integrity: sha512-4gd7VpWNQNB4UKKCFFVcp1AVv+FMOgs9NKzjHKusc8jTMhd5eL1NqQqOpE0KzMds804/yHlglp3uxgluOqAPLw==}
     engines: {node: '>= 0.4'}
@@ -3671,10 +3674,6 @@ packages:
 
   is-buffer@1.1.6:
     resolution: {integrity: sha512-NcdALwpXkTm5Zvvbk7owOUSvVvBKDgKP5/ewfXEznmQFfs4ZRmanOeKBTjRVjka3QFoN6XJ+9F3USqfHqTaU5w==}
-
-  is-buffer@2.0.5:
-    resolution: {integrity: sha512-i2R6zNFDwgEHJyQUtJEk0XFi1i0dPFn/oqjK3/vPCcDeJvW5NQ83V8QbicfF1SupOaB0h8ntgBC2YiE7dfyctQ==}
-    engines: {node: '>=4'}
 
   is-callable@1.2.7:
     resolution: {integrity: sha512-1BC0BVFhS/p0qtw6enp8e+8OD0UrK0oFLztSjNzhcKA3WDuJxxAPXzPuPtKkjEY9UUoEWlX/8fgKeu2S8i9JTA==}
@@ -3931,6 +3930,10 @@ packages:
 
   isexe@2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
+
+  isexe@3.1.5:
+    resolution: {integrity: sha512-6B3tLtFqtQS4ekarvLVMZ+X+VlvQekbe4taUkf/rhVO3d/h0M2rfARm/pXLcPEsjjMsFgrFgSrhQIxcSVrBz8w==}
+    engines: {node: '>=18'}
 
   isobject@2.1.0:
     resolution: {integrity: sha512-+OUdGJlgjOBZDfxnDjYYG6zp487z0JGNQq3cYQYg5f5hKR+syHMsaztzGeml/4kGG55CSpKSpWTY+jYGgsHLgA==}
@@ -5748,8 +5751,8 @@ packages:
   sprintf-js@1.1.2:
     resolution: {integrity: sha512-VE0SOVEHCk7Qc8ulkWw3ntAzXuqf7S2lvwQaDLRnUeIEaKNQJzV6BwmLKhOqT61aGhfUMrXeaBk+oDGCzvhcug==}
 
-  sq-ecosystem@0.21.1:
-    resolution: {integrity: sha512-cA2EQm7i2mvmWJbBoVVNvvaoqqyFVKHdfzc0cXZkb2h60ZUpZbp7mt/rddi1dEnF7dSpL1Vd+3JKZsNgbuYHZA==}
+  sq-ecosystem@0.21.2:
+    resolution: {integrity: sha512-UnftprfYZEKdETtIlEljvFz6fBAjpji0ZU0XuIJiB43WsX0C3zre5+tyDtouLymJUTfWQZHkr+l7ZhEMmskLUQ==}
 
   sq-native@1.0.10:
     resolution: {integrity: sha512-0QG64YU3gUmFXmTeV8XYCfTZpj19T7l5zjcuO8DDQ1ND7D0K8lZXkyjYPs3ZwvtoJAztgyOR3L1/yfjAeLnW2w==}
@@ -5757,8 +5760,8 @@ packages:
   sqreen-sdk@0.8.1:
     resolution: {integrity: sha512-d5PoN05g6K8cbCZky2zchHRQQ2y/+egBjq6Zc2rYxqPip1ssXWCtjhmNaRze8BkXnFMozNtYsX69R8Mt/dEoAQ==}
 
-  sqreen@1.64.2:
-    resolution: {integrity: sha512-z1yYtHtduF0yIU6Ym33FCH2YEBe8Il/FfzjCDNvCNI3K1Wk7ID8hn9E0x047tBsdIxFkeO23Z72MZ2iQL0osMg==}
+  sqreen@2.0.2:
+    resolution: {integrity: sha512-SiUz7kLcXCmHs9UdpcdiyQeEf5zm4i3bQ6fnPaodeTxeIALTGFI7ZXs0SeL5sItzcfdIgS5ZuxQLqFTJyybzSg==}
     engines: {node: '>=4.0'}
     hasBin: true
 
@@ -5800,9 +5803,9 @@ packages:
   stream-shift@1.0.3:
     resolution: {integrity: sha512-76ORR0DO1o1hlKwTbi/DM3EXWGf3ZJYO8cXX5RJwnul2DEg2oyoZyjLNoQM8WsvZiFKCRfC1O0J7iCvie3RZmQ==}
 
-  streamsearch@0.1.2:
-    resolution: {integrity: sha512-jos8u++JKm0ARcSUTAZXOVC0mSox7Bhn6sBgty73P1f3JGf7yG2clTbBNHUdde/kdvP2FESam+vM6l8jBrNxHA==}
-    engines: {node: '>=0.8.0'}
+  streamsearch@1.1.0:
+    resolution: {integrity: sha512-Mcc5wHehp9aXz1ax6bZUyY5afg9u2rv5cqQI3mRrYkGC8rW2hM02jWuwjtL++LS5qinSyhj2QfLyNsuc+VsExg==}
+    engines: {node: '>=10.0.0'}
 
   strict-uri-encode@1.1.0:
     resolution: {integrity: sha512-R3f198pcvnB+5IpnBlRkphuE9n46WyVl8I39W/ZUTZLz4nqSP/oLYUrcnJrw462Ds8he4YKMov2efsTIw1BDGQ==}
@@ -5972,6 +5975,11 @@ packages:
   terser@4.8.1:
     resolution: {integrity: sha512-4GnLC0x667eJG0ewJTa6z/yXrbLGv80D9Ru6HIpCQmO+Q4PfEtBFi0ObSckqwL6VyQv/7ENJieXHo2ANmdQwgw==}
     engines: {node: '>=6.0.0'}
+    hasBin: true
+
+  terser@5.46.1:
+    resolution: {integrity: sha512-vzCjQO/rgUuK9sf8VJZvjqiqiHFaZLnOiimmUuOKODxWL8mm/xua7viT7aqX7dgPY60otQjUotzFMmCB4VdmqQ==}
+    engines: {node: '>=10'}
     hasBin: true
 
   test-exclude@6.0.0:
@@ -6449,6 +6457,11 @@ packages:
   which@2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}
     engines: {node: '>= 8'}
+    hasBin: true
+
+  which@4.0.0:
+    resolution: {integrity: sha512-GlaYyEb07DPxYCKhKzplCWBJtvxZcZMrL+4UkrTSJHHPyZU4mYYTv3qaOe77H7EODLSSopAUFAc6W8U4yqvscg==}
+    engines: {node: ^16.13.0 || >=18.0.0}
     hasBin: true
 
   wide-align@1.1.3:
@@ -7780,6 +7793,11 @@ snapshots:
 
   '@jridgewell/resolve-uri@3.1.2': {}
 
+  '@jridgewell/source-map@0.3.11':
+    dependencies:
+      '@jridgewell/gen-mapping': 0.3.13
+      '@jridgewell/trace-mapping': 0.3.31
+
   '@jridgewell/sourcemap-codec@1.5.5': {}
 
   '@jridgewell/trace-mapping@0.3.31':
@@ -8825,9 +8843,9 @@ snapshots:
 
   builtin-status-codes@3.0.0: {}
 
-  busboy@0.3.1:
+  busboy@1.6.0:
     dependencies:
-      dicer: 0.3.0
+      streamsearch: 1.1.0
 
   bytes@3.1.2: {}
 
@@ -9533,10 +9551,6 @@ snapshots:
     optional: true
 
   detect-newline@3.1.0: {}
-
-  dicer@0.3.0:
-    dependencies:
-      streamsearch: 0.1.2
 
   diff-sequences@26.6.2: {}
 
@@ -10301,10 +10315,6 @@ snapshots:
       flatted: 3.4.2
       keyv: 4.5.4
 
-  flat@4.1.1:
-    dependencies:
-      is-buffer: 2.0.5
-
   flat@5.0.2: {}
 
   flatted@3.4.2: {}
@@ -10571,6 +10581,12 @@ snapshots:
       ini: 1.3.8
       kind-of: 6.0.3
       which: 1.3.1
+
+  global-prefix@4.0.0:
+    dependencies:
+      ini: 4.1.3
+      kind-of: 6.0.3
+      which: 4.0.0
 
   globals@13.24.0:
     dependencies:
@@ -10913,6 +10929,8 @@ snapshots:
 
   ini@2.0.0: {}
 
+  ini@4.1.3: {}
+
   internal-slot@1.1.0:
     dependencies:
       es-errors: 1.3.0
@@ -10985,8 +11003,6 @@ snapshots:
       has-tostringtag: 1.0.2
 
   is-buffer@1.1.6: {}
-
-  is-buffer@2.0.5: {}
 
   is-callable@1.2.7: {}
 
@@ -11192,6 +11208,8 @@ snapshots:
   isarray@2.0.5: {}
 
   isexe@2.0.0: {}
+
+  isexe@3.1.5: {}
 
   isobject@2.1.0:
     dependencies:
@@ -13509,9 +13527,9 @@ snapshots:
 
   sprintf-js@1.1.2: {}
 
-  sq-ecosystem@0.21.1:
+  sq-ecosystem@0.21.2:
     dependencies:
-      busboy: 0.3.1
+      busboy: 1.6.0
       on-finished: 2.4.1
       semver: 6.3.1
       shimmer: 1.2.1
@@ -13532,7 +13550,7 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  sqreen@1.64.2:
+  sqreen@2.0.2:
     dependencies:
       async-listener: 0.6.10
       async-lock: 1.4.1
@@ -13540,7 +13558,7 @@ snapshots:
       emitter-listener: 1.1.2
       escape-html: 1.0.3
       express-list-endpoints: 4.0.1
-      flat: 4.1.1
+      flat: 5.0.2
       http-proxy-agent: 2.1.0
       https-proxy-agent: 3.0.1
       ip: 1.1.9
@@ -13552,7 +13570,7 @@ snapshots:
       recursive-readdir: 2.2.3
       semver: 5.7.2
       shimmer: 1.2.1
-      sq-ecosystem: 0.21.1
+      sq-ecosystem: 0.21.2
       sqreen-sdk: 0.8.1
       uuid: 3.4.0
       winston: 2.4.7
@@ -13608,7 +13626,7 @@ snapshots:
 
   stream-shift@1.0.3: {}
 
-  streamsearch@0.1.2: {}
+  streamsearch@1.1.0: {}
 
   strict-uri-encode@1.1.0: {}
 
@@ -13822,6 +13840,13 @@ snapshots:
       acorn: 8.16.0
       commander: 2.20.3
       source-map: 0.6.1
+      source-map-support: 0.5.21
+
+  terser@5.46.1:
+    dependencies:
+      '@jridgewell/source-map': 0.3.11
+      acorn: 8.16.0
+      commander: 2.20.3
       source-map-support: 0.5.21
 
   test-exclude@6.0.0:
@@ -14385,6 +14410,10 @@ snapshots:
   which@2.0.2:
     dependencies:
       isexe: 2.0.0
+
+  which@4.0.0:
+    dependencies:
+      isexe: 3.1.5
 
   wide-align@1.1.3:
     dependencies:
