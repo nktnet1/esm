@@ -71,7 +71,7 @@
     "eslint-plugin-node": "^11.1.0",
     "execa": "^4.1.0",
     "express": "^4.22.1",
-    "flow-remove-types": "^2.309.0",
+    "flow-remove-types": "^2.310.0",
     "fs-extra": "^9.1.0",
     "global-prefix": "^3.0.0",
     "globby": "^11.1.0",
