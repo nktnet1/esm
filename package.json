@@ -29,6 +29,7 @@
     "prelint": "pnpm pretest",
     "prepare": "husky",
     "prepub": "pnpm test:prod && pnpm build:prod",
+    "prepublishOnly": "pnpm build:prod",
     "pretest": "pnpm build --test",
     "pretest:prod": "pnpm build:prod --test",
     "build": "node script/build.js",
