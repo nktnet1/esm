@@ -1,5 +1,3 @@
-"use strict"
-
 module.exports = {
   env: {
     es6: true,
@@ -15,6 +13,7 @@ module.exports = {
     __shared__: false,
     WebAssembly: false
   },
+  ignorePatterns: ["test/misc/namespace.mjs"],
   parser: "eslint-plugin-import/memo-parser",
   parserOptions: {
     ecmaVersion: 12,
