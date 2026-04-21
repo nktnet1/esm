@@ -10,9 +10,13 @@ const setupTest262 = require("./setup-test262.js")
 const terser = require("terser").minify
 const trash = require("./trash.js")
 
-const argv = require("yargs")
+const yargs = require("yargs/yargs")
+const { hideBin } = require("yargs/helpers")
+
+const argv = yargs(hideBin(process.argv))
   .boolean("prod")
-  .argv
+  .boolean("test")
+  .parse()
 
 const isWin = process.platform === "win32"
 
