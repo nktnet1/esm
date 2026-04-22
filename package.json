@@ -107,7 +107,7 @@
     "test262-parser": "^2.2.0",
     "trash": "^9.0.0",
     "ts-node": "^10.9.2",
-    "typescript": "^3.9.10",
+    "typescript": "^6.0.3",
     "unexpected": "^13.2.1",
     "unused-webpack-plugin": "^2.4.0",
     "webpack": "^4.47.0",
