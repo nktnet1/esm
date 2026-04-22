@@ -1,21 +1,26 @@
 # esm-sync
 
-**This is a forked version of the [esm package](https://www.npmjs.com/package/esm)**: the brilliantly simple, babel-less, bundle-less ECMAScript module loader (which is now unmaintained). This fork includes:
+**This is a fork of [esm](https://github.com/standard-things/esm)**: the brilliantly simple, babel-less, bundle-less ECMAScript module loader (which is now unmaintained).
+
+This fork includes:
 
 * Assorted updates from [@httptoolkit/esm](https://github.com/httptoolkit/esm) and [esm-wallaby fork](https://www.npmjs.com/package/esm-wallaby), adding support for ES modules containing new ES syntax, supporting modern Node versions (at least up to v22), and supporting `node:*` imports.
 * Support for modules that use the `const require = createRequire(...)` pattern (or declare any other global `require` variable) which are otherwise unusable with `esm`.
 * Support for modules that use only an `exports` map in their package.json, without a `main` field, which are otherwise unresolvable (reporting "Cannot find module", even though `import()` works correctly).
 * Built-in types for use in TypeScript projects
 
-Install
----
+This package is maintained for use in the [import-sync](https://github.com/nktnet1/import-sync) project.
+
+You may also be interested in [jiti](https://github.com/unjs/jiti), which provides legacy (deprecated, but still reliable) support for synchronous imports.
+
+
+## Install
 
 ```sh
 npm install esm-sync
 ```
 
-Getting started
----
+## Getting started
 
 There are two ways to enable `esm-sync`.
 
@@ -42,8 +47,7 @@ There are two ways to enable `esm-sync`.
     ```
     :bulb: Omit the filename to enable `esm-sync` in the REPL.
 
-Features
----
+## Features
 
 :clap: By default, :100: percent CJS interoperability is enabled so you can get stuff done.<br>
 :lock: `.mjs` files are limited to basic functionality without support for `esm-sync` options.
@@ -59,8 +63,7 @@ Out of the box `esm-sync` just works, no configuration necessary, and supports:
 * Node `stdin`, [`--eval`](https://nodejs.org/api/cli.html#cli_e_eval_script), [`--print`](https://nodejs.org/api/cli.html#cli_p_print_script) flags
 * Node [`--check`](https://nodejs.org/api/cli.html#cli_c_check) flag _(Node 10+)_
 
-Options
----
+## Options
 
 Specify options with one of the following:
 
