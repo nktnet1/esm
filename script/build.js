@@ -26,11 +26,10 @@ const trashPaths = [
   loaderPath
 ]
 
-const webpackArgs = [
+const webpackArgs =
   argv.prod && ! argv.test
-    ? "--display-optimization-bailout"
-    : "--hide-modules"
-]
+    ? ["--stats=normal"]
+    : ["--stats=minimal"]
 
 function cleanRepo() {
   return Promise.all(trashPaths.map(trash))
