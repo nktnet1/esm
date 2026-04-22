@@ -6,10 +6,13 @@ const path = require("path")
 const setupAcorn = require("./setup-acorn.js")
 const trash = require("./trash.js")
 
-const argv = require("yargs")
+const yargs = require("yargs/yargs")
+const { hideBin } = require("yargs/helpers")
+
+const argv = yargs(hideBin(process.argv))
   .boolean("prod")
   .boolean("test")
-  .argv
+  .parse()
 
 const NODE_ENV = argv.prod ? "production" : "development"
 const ESM_ENV = NODE_ENV + (argv.test ? "-test" : "")
@@ -23,11 +26,10 @@ const trashPaths = [
   loaderPath
 ]
 
-const webpackArgs = [
+const webpackArgs =
   argv.prod && ! argv.test
-    ? "--display-optimization-bailout"
-    : "--hide-modules"
-]
+    ? ["--stats=normal"]
+    : ["--stats=minimal"]
 
 function cleanRepo() {
   return Promise.all(trashPaths.map(trash))
