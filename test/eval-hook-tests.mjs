@@ -26,7 +26,7 @@ describe("--eval hook tests", function () {
           evalFlag, [
             'import { log } from "console"',
             'log("eval-hook:true")'
-          ].join("\n")
+          ].join("\n\n")
         ])
       }
     }
@@ -35,7 +35,10 @@ describe("--eval hook tests", function () {
       .reduce((promise, args) =>
         promise
           .then(() => node(args))
-          .then(({ stdout }) => assert.ok(stdout.includes("eval-hook:true")))
+          .then(({ stdout, stderr }) => {
+            assert.strictEqual(stderr, "")
+            assert.ok(stdout.includes("eval-hook:true"))
+          })
       , Promise.resolve())
   })
 
@@ -49,7 +52,7 @@ describe("--eval hook tests", function () {
         runs.push([
           requireFlag, "../index.js",
           printFlag, [
-            'import { format } from "util"',
+            'const { format } = require("util")',
             'format("print-hook:%s", true)'
           ].join("\n")
         ])
@@ -60,7 +63,10 @@ describe("--eval hook tests", function () {
       .reduce((promise, args) =>
         promise
           .then(() => node(args))
-          .then(({ stdout }) => assert.ok(stdout.includes("print-hook:true")))
+          .then(({ stdout, stderr }) => {
+            assert.strictEqual(stderr, "")
+            assert.ok(stdout.includes("print-hook:true"))
+          })
       , Promise.resolve())
   })
 })

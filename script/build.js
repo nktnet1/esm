@@ -6,13 +6,15 @@ const path = require("path")
 const setupAcorn = require("./setup-acorn.js")
 const trash = require("./trash.js")
 
-const yargs = require("yargs/yargs")
-const { hideBin } = require("yargs/helpers")
+const { program } = require("commander")
 
-const argv = yargs(hideBin(process.argv))
-  .boolean("prod")
-  .boolean("test")
-  .parse()
+program
+  .option("--prod", "enable production mode")
+  .option("--test", "enable test mode")
+
+program.parse(process.argv)
+
+const argv = program.opts()
 
 const NODE_ENV = argv.prod ? "production" : "development"
 const ESM_ENV = NODE_ENV + (argv.test ? "-test" : "")

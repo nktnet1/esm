@@ -3,6 +3,7 @@
 const SemVer = require("semver")
 
 const execa = require("execa")
+const semver = require("semver")
 const fs = require("fs-extra")
 const ignorePaths = require("./ignore-paths.js")
 const path = require("path")
@@ -10,13 +11,15 @@ const setupTest262 = require("./setup-test262.js")
 const terser = require("terser").minify
 const trash = require("./trash.js")
 
-const yargs = require("yargs/yargs")
-const { hideBin } = require("yargs/helpers")
+const { program } = require("commander")
 
-const argv = yargs(hideBin(process.argv))
-  .boolean("prod")
-  .boolean("test")
-  .parse()
+program
+  .option("--prod")
+  .option("--test")
+
+program.parse()
+
+const argv = program.opts()
 
 const isWin = process.platform === "win32"
 
@@ -91,6 +94,16 @@ function minifyJS(content) {
 }
 
 function runTests(cached) {
+  // Disables [DEP0144] DeprecationWarning:
+  //     module.parent is deprecated due to accuracy issues.
+  //     Please use require.main to find program entry point instead.
+  const nodeOptions = [
+    "--trace-warnings",
+    ...(semver.gte(process.versions.node, "20.0.0")
+      ? ["--disable-warning=DEP0144"]
+      : [])
+  ].join(" ")
+
   return execa(nodePath, nodeArgs, {
     cwd: testPath,
     env: {
@@ -98,7 +111,7 @@ function runTests(cached) {
       ESM_OPTIONS: "{cjs:false,mode:'auto'}",
       HOME,
       NODE_ENV,
-      NODE_OPTIONS: "--trace-warnings",
+      NODE_OPTIONS: nodeOptions,
       NODE_PATH,
       NODE_PENDING_DEPRECATION: 1,
       USERPROFILE: HOME

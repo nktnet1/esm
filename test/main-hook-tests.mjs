@@ -145,12 +145,14 @@ describe("main hook tests", function () {
       .then(({ stderr }) => assert.ok(stderr))
   )
 
-  it("should support loading `@std/esm`", () =>
+  // Old, deprecated package: https://www.npmjs.com/package/@std/esm
+  it.skip("should support loading `@std/esm`", () =>
     runMain("./fixture/main-hook/std-esm.js")
-      .then(({ stdout }) => {
+      .then(({ stdout, stderr }) => {
         const exported = { a: "a", b: "b", c: "c", default: "default" }
         const expected = JSON.stringify(exported)
 
+        assert.strictEqual(stderr, "")
         assert.ok(stdout.includes("std-esm:" + expected))
       })
   )
