@@ -61,8 +61,8 @@ importers:
         specifier: ^25.6.0
         version: 25.6.0
       acorn:
-        specifier: ^8.16.0
-        version: 8.16.0
+        specifier: 8.5.0
+        version: 8.5.0
       ava:
         specifier: ^3.15.0
         version: 3.15.0
@@ -1503,6 +1503,11 @@ packages:
 
   acorn@8.16.0:
     resolution: {integrity: sha512-UVJyE9MttOsBQIDKw1skb9nAwQuR5wuGD3+82K6JgJlm/Y+KI92oNsMNGZCYdDsVtRHSak0pcV5Dno5+4jh9sw==}
+    engines: {node: '>=0.4.0'}
+    hasBin: true
+
+  acorn@8.5.0:
+    resolution: {integrity: sha512-yXbYeFy+jUuYd3/CDcg2NkIYE991XYX/bje7LmjJigUciaeO1JR4XxXgCIV1/Zc/dRuFEyw1L0pbA+qynJkW5Q==}
     engines: {node: '>=0.4.0'}
     hasBin: true
 
@@ -7821,6 +7826,8 @@ snapshots:
 
   acorn@8.16.0: {}
 
+  acorn@8.5.0: {}
+
   agent-base@4.3.0:
     dependencies:
       es6-promisify: 5.0.0
@@ -8049,7 +8056,7 @@ snapshots:
   ava@3.15.0:
     dependencies:
       '@concordance/react': 2.0.0
-      acorn: 8.16.0
+      acorn: 8.5.0
       acorn-walk: 8.3.5
       ansi-styles: 5.2.0
       arrgv: 1.0.2
@@ -10882,7 +10889,7 @@ snapshots:
   jsdom@16.7.0:
     dependencies:
       abab: 2.0.6
-      acorn: 8.16.0
+      acorn: 8.5.0
       acorn-globals: 6.0.0
       cssom: 0.4.4
       cssstyle: 2.3.0
@@ -12875,7 +12882,7 @@ snapshots:
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
       '@types/node': 25.6.0
-      acorn: 8.16.0
+      acorn: 8.5.0
       acorn-walk: 8.3.5
       arg: 4.1.3
       create-require: 1.1.1
@@ -13153,7 +13160,7 @@ snapshots:
   webpack-bundle-analyzer@5.3.0:
     dependencies:
       '@discoveryjs/json-ext': 0.6.3
-      acorn: 8.16.0
+      acorn: 8.5.0
       acorn-walk: 8.3.5
       commander: 14.0.3
       escape-string-regexp: 5.0.0
