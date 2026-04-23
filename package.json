@@ -64,6 +64,7 @@
     "babel-plugin-transform-remove-debugger": "^6.9.4",
     "bluebird": "^3.7.2",
     "chai": "^4.5.0",
+    "commander": "^14.0.3",
     "core-js": "^2.6.12",
     "download": "^8.0.0",
     "eslint": "^7.32.0",
@@ -112,8 +113,7 @@
     "unused-webpack-plugin": "^2.4.0",
     "webpack": "^4.47.0",
     "webpack-bundle-analyzer": "^5.3.0",
-    "webpack-cli": "^4.10.0",
-    "yargs": "^18.0.0"
+    "webpack-cli": "^4.10.0"
   },
   "files": [
     "index.js",
