@@ -2,29 +2,8 @@
   "name": "esm-sync",
   "version": "3.3.5",
   "description": "Tomorrow's ECMAScript modules today!",
-  "keywords": [
-    "commonjs",
-    "ecmascript",
-    "export",
-    "import",
-    "modules",
-    "node",
-    "require"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/nktnet1/esm-sync"
-  },
   "license": "MIT",
   "author": "Khiet Tam Nguyen",
-  "main": "esm.js",
-  "types": "index.d.ts",
-  "private": false,
-  "runkitExample": "require = require(\"esm-sync\")(module)\nrequire(\"lodash-es\")",
-  "esm": true,
-  "engines": {
-    "node": ">=6"
-  },
   "scripts": {
     "prelint": "pnpm pretest",
     "prepare": "husky",
@@ -39,6 +18,36 @@
     "pub": "node script/publish.js",
     "test": "node script/test.js",
     "test:prod": "node script/test.js --prod"
+  },
+  "main": "esm.js",
+  "types": "index.d.ts",
+  "private": false,
+  "runkitExample": "require = require(\"esm-sync\")(module)\nrequire(\"lodash-es\")",
+  "esm": true,
+  "engines": {
+    "node": ">=6"
+  },
+  "keywords": [
+    "commonjs",
+    "ecmascript",
+    "export",
+    "import",
+    "modules",
+    "node",
+    "require"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nktnet1/esm-sync"
+  },
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "esm.js",
+    "esm/loader.js"
+  ],
+  "dependencies": {
+    "punycode": "^2.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
@@ -114,15 +123,6 @@
     "webpack": "^4.47.0",
     "webpack-bundle-analyzer": "^5.3.0",
     "webpack-cli": "^4.10.0"
-  },
-  "files": [
-    "index.js",
-    "index.d.ts",
-    "esm.js",
-    "esm/loader.js"
-  ],
-  "dependencies": {
-    "punycode": "^2.3.1"
   },
   "packageManager": "pnpm@10.33.1"
 }
