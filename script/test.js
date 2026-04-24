@@ -99,7 +99,7 @@ function runTests(cached) {
   //     Please use require.main to find program entry point instead.
   const nodeOptions = [
     "--trace-warnings",
-    ...(semver.gte(process.versions.node, "20.0.0")
+    ...(semver.gte(process.versions.node, "20.11.0")
       ? ["--disable-warning=DEP0144"]
       : [])
   ].join(" ")

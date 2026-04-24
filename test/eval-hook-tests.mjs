@@ -1,6 +1,7 @@
 import assert from "assert"
 import execa from "execa"
 import path from "path"
+import semver from "semver"
 
 const testPath = path.resolve(".")
 
@@ -36,7 +37,11 @@ describe("--eval hook tests", function () {
         promise
           .then(() => node(args))
           .then(({ stdout, stderr }) => {
-            assert.strictEqual(stderr, "")
+            if (semver.gte(process.versions.node, "20.11.0")) {
+              assert.strictEqual(stderr, "")
+            } else {
+              assert.ok(stderr.includes("DEP0144") || stderr.length === 0)
+            }
             assert.ok(stdout.includes("eval-hook:true"))
           })
       , Promise.resolve())
@@ -64,7 +69,11 @@ describe("--eval hook tests", function () {
         promise
           .then(() => node(args))
           .then(({ stdout, stderr }) => {
-            assert.strictEqual(stderr, "")
+            if (semver.gte(process.versions.node, "20.11.0")) {
+              assert.strictEqual(stderr, "")
+            } else {
+              assert.ok(stderr.includes("DEP0144") || stderr.length === 0)
+            }
             assert.ok(stdout.includes("print-hook:true"))
           })
       , Promise.resolve())

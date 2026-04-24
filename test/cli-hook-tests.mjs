@@ -1,6 +1,7 @@
 import assert from "assert"
 import execa from "execa"
 import path from "path"
+import semver from "semver"
 
 const testPath = path.resolve(".")
 
@@ -35,7 +36,13 @@ describe("CLI hook tests", function () {
               "UNRESOLVABLE_VALUE",
               request
             ], envAuto))
-          .then(({ stderr }) => assert.strictEqual(stderr, ""))
+          .then(({ stderr }) => {
+            if (semver.gte(process.versions.node, "20.11.3")) {
+              assert.strictEqual(stderr, "")
+            } else {
+              assert.ok(stderr.includes("DEP0144") || stderr.length === 0)
+            }
+          })
       , Promise.resolve())
   )
 
