@@ -1,7 +1,6 @@
 /* eslint strict: off, node/no-unsupported-features: ["error", { version: 6 }] */
 "use strict"
 
-const arrayRemove = require("./script/array-remove.js")
 const fs = require("fs-extra")
 const path = require("path")
 const webpack = require("webpack")
@@ -12,65 +11,18 @@ const {
   NormalModuleReplacementPlugin
 } = webpack
 
-const {
-  ModuleConcatenationPlugin
-} = webpack.optimize
-
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer")
 const TerserPlugin = require("terser-webpack-plugin")
 const UnusedPlugin = require("unused-webpack-plugin")
 
-class WebpackTemplatePlugin {
-  apply({ hooks: { compilation } }) {
-    compilation.tap("MainTemplate", ({ mainTemplate: { hooks } }) => {
-      // Simplify webpack module scaffolding.
-      hooks.requireExtensions.tap("MainTemplate", () =>
-        [
-          "__webpack_require__.d = function (exported, name, get) {",
-          "  Reflect.defineProperty(exported, name, {",
-          "    configurable: true,",
-          "    enumerable: true,",
-          "    get",
-          "  })",
-          "}",
-          "__webpack_require__.n = function (exported) {",
-          "  exported.a = exported",
-          "  return function () { return exported }",
-          "}"
-        ].join("\n")
-      )
-
-      // Remove webpack additions.
-      hooks.render.tap("ModuleTemplate", ({ children }) => {
-        const COMPATIBILITY_HELPER = "__webpack_require__.r(__webpack_exports__);\n"
-        const USE_STRICT = '"use strict";\n'
-
-        function shouldRemove(value) {
-          return value === COMPATIBILITY_HELPER ||
-                 value === USE_STRICT
-        }
-
-        arrayRemove(children, shouldRemove)
-
-        for (let child of children) {
-          do {
-            arrayRemove(child.replacements, ({ content }) => shouldRemove(content))
-          } while ((child = child._source))
-        }
-      })
-    })
-  }
-}
-
 const { ESM_ENV } = process.env
+const isProd = /production/.test(ESM_ENV)
+const isTest = /test/.test(ESM_ENV)
 
 const {
   files: PACKAGE_FILENAMES,
   version: PACKAGE_VERSION
 } = fs.readJSONSync("./package.json")
-
-const isProd = /production/.test(ESM_ENV)
-const isTest = /test/.test(ESM_ENV)
 
 const externals = [
   "Array", "Buffer", "Error", "EvalError", "Function", "JSON", "Object",
@@ -103,15 +55,27 @@ const config = {
   },
   node: false,
   optimization: {
+    concatenateModules: false,
+    mangleExports: false,
     minimizer: [
-      new TerserPlugin({ terserOptions })
+      new TerserPlugin({
+        extractComments: false,
+        terserOptions
+      })
     ],
-    nodeEnv: false
+    nodeEnv: false,
+    providedExports: false,
+    sideEffects: false,
+    usedExports: false
   },
   output: {
+    clean: true,
     filename: "[name].js",
-    libraryExport: "default",
-    libraryTarget: "commonjs2",
+    library: {
+      export: "default",
+      type: "commonjs-module"
+    },
+    module: false,
     path: path.resolve("build"),
     pathinfo: false
   },
@@ -145,25 +109,22 @@ const config = {
       PACKAGE_FILENAMES,
       PACKAGE_VERSION
     }),
-    new ModuleConcatenationPlugin,
     new NormalModuleReplacementPlugin(
       /acorn[\\/]src[\\/]regexp\.js/,
       path.resolve("src/acorn/replacement/regexp.js")
     ),
     new UnusedPlugin({
-      directories : [path.resolve("src")],
+      directories: [path.resolve("src")],
       exclude: [
         ".*",
         "*.json",
         "**/vendor/*"
       ],
-      root : __dirname
-    }),
-    new WebpackTemplatePlugin
+      root: __dirname
+    })
   ],
   target: "node"
 }
-/* eslint-enable sort-keys */
 
 if (isProd) {
   config.plugins.push(
@@ -172,11 +133,13 @@ if (isProd) {
 }
 
 if (isTest) {
-  config.entry.compiler = "./src/compiler.js"
-  config.entry.entry = "./src/entry.js"
-  config.entry.runtime = "./src/runtime.js"
-  config.entry["get-file-path-from-url"] = "./src/util/get-file-path-from-url.js"
-  config.entry["get-url-from-file-path"] = "./src/util/get-url-from-file-path.js"
+  Object.assign(config.entry, {
+    compiler: "./src/compiler.js",
+    entry: "./src/entry.js",
+    "get-file-path-from-url": "./src/util/get-file-path-from-url.js",
+    "get-url-from-file-path": "./src/util/get-url-from-file-path.js",
+    runtime: "./src/runtime.js"
+  })
 }
 
 module.exports = config
