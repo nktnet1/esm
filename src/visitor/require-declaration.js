@@ -6,7 +6,11 @@ import isShadowed from "../parse/is-shadowed.js"
 import overwrite from "../parse/overwrite.js"
 import shared from "../shared.js"
 
-export const ESM_SYNC_REQUIRE_REPLACEMENT = "__esm_sync_require_replacement__"
+export function getEsmRequireReplacementName(runtimeName) {
+  // This is not necessarily unique, but it's tricky here to get a unique name
+  // and the odds of conflict are vanishingly small.
+  return "__esm_sync_req__" + runtimeName
+}
 
 function init() {
   const {
@@ -45,9 +49,7 @@ function init() {
         return
       }
 
-      // ESM_SYNC_REQUIRE_REPLACEMENT is not necessarily unique, but it's tricky here to
-      // get a unique name and the odds of conflict are vanishingly small.
-      overwrite(this, identifier.start, identifier.end, ESM_SYNC_REQUIRE_REPLACEMENT)
+      overwrite(this, identifier.start, identifier.end, getEsmRequireReplacementName(this.runtimeName))
       this.transforms |= TRANSFORMS_REQUIRE_DECLARATION
 
       this.visitChildren(path)
@@ -62,7 +64,7 @@ function init() {
         return
       }
 
-      overwrite(this, node.start, node.end, ESM_SYNC_REQUIRE_REPLACEMENT)
+      overwrite(this, node.start, node.end, getEsmRequireReplacementName(this.runtimeName))
       this.transforms |= TRANSFORMS_REQUIRE_DECLARATION
 
       this.visitChildren(path)
