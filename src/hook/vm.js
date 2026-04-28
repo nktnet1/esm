@@ -1,3 +1,5 @@
+import semver from "semver"
+
 import COMPILER from "../constant/compiler.js"
 import ENTRY from "../constant/entry.js"
 import ENV from "../constant/env.js"
@@ -39,6 +41,7 @@ import shared from "../shared.js"
 import toExternalError from "../util/to-external-error.js"
 import toExternalFunction from "../util/to-external-function.js"
 import wrap from "../util/wrap.js"
+import safeProcess from "../safe/process.js"
 
 const {
   SOURCE_TYPE_MODULE,
@@ -55,12 +58,12 @@ const {
 } = ENTRY
 
 const {
- CHECK,
- EVAL,
- FLAGS,
- HAS_INSPECTOR,
- INTERNAL,
- REPL
+  CHECK,
+  EVAL,
+  FLAGS,
+  HAS_INSPECTOR,
+  INTERNAL,
+  REPL
 } = ENV
 
 const {
@@ -70,16 +73,7 @@ const {
 function hook(vm) {
   let entry
 
-  function managerWrapper(manager, createScript, args) {
-    const wrapped = Wrapper.find(vm, "createScript", "*")
-
-    return Reflect.apply(wrapped, this, [manager, createScript, args])
-  }
-
-  function methodWrapper(manager, createScript, [content, scriptOptions]) {
-    scriptOptions = assign({}, scriptOptions)
-    scriptOptions.produceCachedData = true
-
+  function transpile(content) {
     const cacheName = getCacheName(content)
     const compileDatas = entry.package.cache.compile
     const { runtimeName } = entry
@@ -105,10 +99,6 @@ function hook(vm) {
 
       compileData = tryWrapper(CachingCompiler.compile, [content, compilerOptions], content)
       compileDatas.set(cacheName, compileData)
-    } else if (compileData.scriptData !== null &&
-               scriptOptions.produceCachedData &&
-               ! has(scriptOptions, "cachedData")) {
-      scriptOptions.cachedData = compileData.scriptData
     }
 
     entry.state = STATE_PARSING_COMPLETED
@@ -130,6 +120,28 @@ function hook(vm) {
         "}" +
       "})();" +
       compileData.code
+
+    return { cacheName, code, compileData }
+  }
+
+  function managerWrapper(manager, func, args) {
+    const wrapped = Wrapper.find(vm, "createScript", "*")
+    return Reflect.apply(wrapped, this, [manager, func, args])
+  }
+
+  function methodWrapper(manager, createScript, [content, scriptOptions]) {
+    scriptOptions = assign({}, scriptOptions)
+    scriptOptions.produceCachedData = true
+
+    const { code, cacheName, compileData } = transpile(content)
+
+    if (
+      compileData.scriptData !== null
+      && scriptOptions.produceCachedData
+      && !has(scriptOptions, "cachedData")
+    ) {
+      scriptOptions.cachedData = compileData.scriptData
+    }
 
     const script = tryWrapper.call(vm, createScript, [code, scriptOptions], content)
 
@@ -194,7 +206,9 @@ function hook(vm) {
   }
 
   function setupEval() {
-    vm.runInThisContext = proxyWrap(vm.runInThisContext, (runInThisContext, [code, options]) => {
+    vm.runInThisContext = proxyWrap(
+      vm.runInThisContext, (runInThisContext, [code, options]
+    ) => {
       vm.runInThisContext = runInThisContext
       setupEntry(shared.unsafeGlobal.module)
       return vm.createScript(code, options).runInThisContext(options)
@@ -211,6 +225,16 @@ function hook(vm) {
     } else if (typeof createContext === "function") {
       REPLServer.prototype.createContext = proxyWrap(createContext, function () {
         REPLServer.prototype.createContext = createContext
+
+        const server = this
+        const originalEval = server.eval
+
+        if (semver.gte(safeProcess.versions.node, "18.0.0")) {
+          server.eval = function (cmd, context, filename, callback) {
+            const { code } = transpile(cmd)
+            return originalEval.call(this, code, context, filename, callback)
+          }
+        }
 
         Reflect.defineProperty(this, "writer", {
           configurable: true,
@@ -233,7 +257,7 @@ function hook(vm) {
                 return writer.options
               },
               set(options) {
-                if (! isObject(options)) {
+                if (!isObject(options)) {
                   throw new ERR_INVALID_ARG_TYPE("options", "Object", options)
                 }
 
@@ -270,8 +294,10 @@ function hook(vm) {
 
     builtinVM.createScript = vm.createScript
 
-    if (INTERNAL &&
-        FLAGS.experimentalREPLAwait) {
+    if (
+      INTERNAL
+      && FLAGS.experimentalREPLAwait
+    ) {
       acornInternalAcorn.enable()
       acornInternalWalk.enable()
     }
@@ -393,7 +419,7 @@ function tryWrapper(func, args, content) {
     error = e
   }
 
-  if (! Loader.state.package.default.options.debug &&
+  if (!Loader.state.package.default.options.debug &&
       isStackTraceMaskable(error)) {
     maskStackTrace(error, { content })
   } else {
