@@ -1751,10 +1751,9 @@ describe("miscellaneous tests", () => {
         })
     })
 
-    // Skipping test - when upgrading from acorn 8.4.1 to 8.5.0, an error is no
-    // longer thrown for importing a file with `new.target` at the top level.
-    it.skip("should error when using top-level `new.target`", () => {
+    it("should error when using top-level `new.target`", () => {
       const filename = path.resolve("fixture/source/new-target.mjs")
+      console.log({ filename })
 
       return import(filename)
         .then(() => assert.fail(filename + " was supposed to fail to import, but it did not."))
