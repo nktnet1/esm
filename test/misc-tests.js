@@ -1753,7 +1753,6 @@ describe("miscellaneous tests", () => {
 
     it("should error when using top-level `new.target`", () => {
       const filename = path.resolve("fixture/source/new-target.mjs")
-      console.log({ filename })
 
       return import(filename)
         .then(() => assert.fail(filename + " was supposed to fail to import, but it did not."))
