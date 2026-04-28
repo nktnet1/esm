@@ -125,7 +125,6 @@ function hook(vm) {
 
   function managerWrapper(manager, func, args) {
     const wrapped = Wrapper.find(vm, "createScript", "*")
-
     return Reflect.apply(wrapped, this, [manager, func, args])
   }
 
