@@ -41,6 +41,7 @@ import shared from "../shared.js"
 import toExternalError from "../util/to-external-error.js"
 import toExternalFunction from "../util/to-external-function.js"
 import wrap from "../util/wrap.js"
+import safeProcess from '../safe/process.js'
 
 const {
   SOURCE_TYPE_MODULE,
@@ -228,7 +229,7 @@ function hook(vm) {
         const server = this
         const originalEval = server.eval
 
-        if (semver.gte(process.versions.node, "18.0.0")) {
+        if (semver.gte(safeProcess.versions.node, "18.0.0")) {
           server.eval = function (cmd, context, filename, callback) {
             const { code } = transpile(cmd)
             return originalEval.call(this, code, context, filename, callback)
