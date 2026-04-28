@@ -59,7 +59,11 @@ function init() {
     ["The keyword 'yield' is reserved", UNEXPECTED_STRICT_MODE_RESERVED_WORD],
     ["Unterminated string constant", INVALID_OR_UNEXPECTED_TOKEN],
     ["Unterminated template", UNTERMINATED_TEMPLATE],
-    ["'new.target' can only be used in functions", ILLEGAL_NEW_TARGET]
+
+    // Acorn v8.4.1 and below
+    ["'new.target' can only be used in functions", ILLEGAL_NEW_TARGET],
+    // Acorn v8.5.0 and above
+    ["'new.target' can only be used in functions and class static block", ILLEGAL_NEW_TARGET]
   ])
 
   const Plugin = {
