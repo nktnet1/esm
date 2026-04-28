@@ -55,12 +55,12 @@ const {
 } = ENTRY
 
 const {
- CHECK,
- EVAL,
- FLAGS,
- HAS_INSPECTOR,
- INTERNAL,
- REPL
+  CHECK,
+  EVAL,
+  FLAGS,
+  HAS_INSPECTOR,
+  INTERNAL,
+  REPL
 } = ENV
 
 const {
@@ -70,16 +70,7 @@ const {
 function hook(vm) {
   let entry
 
-  function managerWrapper(manager, createScript, args) {
-    const wrapped = Wrapper.find(vm, "createScript", "*")
-
-    return Reflect.apply(wrapped, this, [manager, createScript, args])
-  }
-
-  function methodWrapper(manager, createScript, [content, scriptOptions]) {
-    scriptOptions = assign({}, scriptOptions)
-    scriptOptions.produceCachedData = true
-
+  function transpile(content) {
     const cacheName = getCacheName(content)
     const compileDatas = entry.package.cache.compile
     const { runtimeName } = entry
@@ -105,10 +96,6 @@ function hook(vm) {
 
       compileData = tryWrapper(CachingCompiler.compile, [content, compilerOptions], content)
       compileDatas.set(cacheName, compileData)
-    } else if (compileData.scriptData !== null &&
-               scriptOptions.produceCachedData &&
-               ! has(scriptOptions, "cachedData")) {
-      scriptOptions.cachedData = compileData.scriptData
     }
 
     entry.state = STATE_PARSING_COMPLETED
@@ -130,6 +117,27 @@ function hook(vm) {
         "}" +
       "})();" +
       compileData.code
+
+    return { cacheName, code, compileData }
+  }
+
+  function managerWrapper(manager, func, args) {
+    const wrapped = Wrapper.find(vm, "createScript", "*")
+
+    return Reflect.apply(wrapped, this, [manager, func, args])
+  }
+
+  function methodWrapper(manager, createScript, [content, scriptOptions]) {
+    scriptOptions = assign({}, scriptOptions)
+    scriptOptions.produceCachedData = true
+
+    const { code, cacheName, compileData } = transpile(content)
+
+    if (compileData.scriptData !== null &&
+        scriptOptions.produceCachedData &&
+        ! has(scriptOptions, "cachedData")) {
+      scriptOptions.cachedData = compileData.scriptData
+    }
 
     const script = tryWrapper.call(vm, createScript, [code, scriptOptions], content)
 
@@ -211,6 +219,15 @@ function hook(vm) {
     } else if (typeof createContext === "function") {
       REPLServer.prototype.createContext = proxyWrap(createContext, function () {
         REPLServer.prototype.createContext = createContext
+
+        const server = this
+        const originalEval = server.eval
+
+        server.eval = function (cmd, context, filename, callback) {
+          const { code } = transpile(cmd)
+
+          return originalEval.call(this, code, context, filename, callback)
+        }
 
         Reflect.defineProperty(this, "writer", {
           configurable: true,
