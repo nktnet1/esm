@@ -226,7 +226,7 @@ describe("scenario tests", function () {
     .then(({ stdout }) => assert.ok(stdout.includes("unexpected:true")))
   )
 
-  it.skip("should work with webpack", () => {
+  it("should work with webpack", () => {
     const dirPath = path.resolve("fixture/scenario/webpack")
     const configPath = path.resolve(dirPath, "webpack.config.js")
     const entryPath = path.resolve(dirPath, "index.js")
