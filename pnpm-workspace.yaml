@@ -7,6 +7,6 @@ allowBuilds:
   fsevents: false
   husky: true
   protobufjs: false
-  sleep: false
+  sleep: true
   sq-native: false
   unrs-resolver: false

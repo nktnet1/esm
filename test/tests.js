@@ -19,10 +19,10 @@ import "./top-level-await-tests.js"
 import "./url-tests.mjs"
 import "./wasm-tests.js"
 import "./require-hook-tests.js"
+import "./scenario-tests.mjs"
 
 // import "./check-hook-tests.mjs"
 // import "./repl-hook-tests.mjs"
-// import "./scenario-tests.mjs"
 // import "./test262.mjs"
 
 beforeEach(resetState)

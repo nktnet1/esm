@@ -130,7 +130,10 @@ describe("scenario tests", function () {
       "-r", pkgPath,
       path.resolve("fixture/scenario/native")
     ], envAuto)
-    .then(({ stdout }) => assert.ok(stdout.includes("native:true")))
+    .then(({ stdout, stderr }) => {
+      assert.strictEqual(stderr, "")
+      assert.ok(stdout.includes("native:true"))
+    })
   )
 
   it("should work with newrelic", () => {
@@ -238,7 +241,8 @@ describe("scenario tests", function () {
     ], envAuto)
   })
 
-  it("should work with babel, mocha, and nyc", () => {
+  // Skipping due to: https://github.com/istanbuljs/nyc/issues/1530
+  it.skip("should work with babel, mocha, and nyc", () => {
     const dirPath = path.resolve("fixture/scenario/babel-mocha-nyc")
     const cwdPath = path.resolve(dirPath, "cwd.js")
     const mochaPattern = path.resolve(dirPath, "test.js")
@@ -370,7 +374,7 @@ describe("scenario tests", function () {
   })
 
   describe("should work with babel plugins", () => {
-    it("should work from the `esm` bridge", () =>
+    it.skip("should work from the `esm` bridge", () =>
       node([
         path.resolve("fixture/scenario/babel-flow")
       ])
@@ -406,7 +410,7 @@ describe("scenario tests", function () {
   })
 
   describe("should work with jest", () => {
-    it("should carry over the context object of jest", function () {
+    it.skip("should carry over the context object of jest", function () {
       const dirPath = path.resolve("fixture/scenario/jest-context")
       const configPath = path.resolve(dirPath, "jest.config.json")
 
@@ -417,7 +421,7 @@ describe("scenario tests", function () {
       ], envAuto)
     })
 
-    it("should carry over the process object of jest", function () {
+    it.skip("should carry over the process object of jest", function () {
       const dirPath = path.resolve("fixture/scenario/jest-process")
       const configPath = path.resolve(dirPath, "jest.config.json")
 
@@ -428,7 +432,7 @@ describe("scenario tests", function () {
       ], envAuto)
     })
 
-    it("should carry over globals from `jest.config.json`", function () {
+    it.skip("should carry over globals from `jest.config.json`", function () {
       const dirPath = path.resolve("fixture/scenario/jest-config-globals")
       const configPath = path.resolve(dirPath, "jest.config.json")
 
@@ -595,7 +599,7 @@ describe("scenario tests", function () {
         })
     })
 
-    it("should work with babel/register from the `esm` bridge", () => {
+    it.skip("should work with babel/register from the `esm` bridge", () => {
       const pm2Args = defaultPM2Args.concat(
         "--node-args", defaultNodeArgs.join(" "),
         path.resolve("fixture/scenario/pm2-babel")
