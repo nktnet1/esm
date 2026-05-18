@@ -63,10 +63,10 @@
     "@babel/register": "^7.29.3",
     "@babel/runtime": "^7.29.2",
     "@hapi/lab": "^24.7.1",
-    "@rspack/cli": "^2.0.2",
-    "@rspack/core": "^2.0.2",
+    "@rspack/cli": "^2.0.3",
+    "@rspack/core": "^2.0.3",
     "@std/esm": "^0.26.0",
-    "@types/node": "^25.6.2",
+    "@types/node": "^25.8.0",
     "acorn": "^8.16.0",
     "adm-zip": "^0.5.17",
     "ava": "^1.4.1",
@@ -84,8 +84,8 @@
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-node": "^11.1.0",
     "execa": "^5.1.1",
-    "express": "^4.22.1",
-    "flow-remove-types": "^2.313.0",
+    "express": "^4.22.2",
+    "flow-remove-types": "^2.314.0",
     "fs-extra": "^11.3.5",
     "global-prefix": "^3.0.0",
     "globby": "^11.1.0",
@@ -127,5 +127,5 @@
     "webpack-bundle-analyzer": "^5.3.0",
     "webpack-cli": "^3.3.12"
   },
-  "packageManager": "pnpm@11.0.9"
+  "packageManager": "pnpm@11.1.2"
 }
